@@ -73,13 +73,11 @@ public class PostInfo {
     public Uri getImageUrl() {
         return imageUrl;
     }
-
     public void setImageUrl(Uri imageUrl) {
         this.imageUrl = imageUrl;
     }
 
     // Permision
-
     public boolean isPermission() {
         return permission;
     }

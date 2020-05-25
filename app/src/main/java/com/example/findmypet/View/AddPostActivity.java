@@ -185,6 +185,8 @@ public class AddPostActivity extends AppCompatActivity implements AdapterView.On
                 case GALLERY:
                     image = (ImageView) findViewById(R.id.add_img);
                     selectedImage = data.getData();
+
+                    // show image
                     image.setImageURI(selectedImage);
                     break;
             }
@@ -217,8 +219,6 @@ public class AddPostActivity extends AppCompatActivity implements AdapterView.On
         btn_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
 
                 // check user have to every text edit
                 if(!isEmpty(title) && !isEmpty(location) && !isEmpty(tel) && !isEmpty(description)){
@@ -284,7 +284,7 @@ public class AddPostActivity extends AppCompatActivity implements AdapterView.On
                     @Override
                     public void onSuccess(Uri uri) {
                         keepimage = uri.toString();
-                        Log.d("Sukkkk", "onSuccess: uri= "+ keepimage);
+                        //Log.d("Sukkkk", "onSuccess: uri= "+ keepimage);
                         PutInformationOnFirebase();
 
                     }
@@ -315,21 +315,18 @@ public class AddPostActivity extends AppCompatActivity implements AdapterView.On
         // put in firebase
         HashMap<String , Object> hashMap = new HashMap<>();
 
-
-
         hashMap.put("title", postInfo.getTitle());
         hashMap.put("location", postInfo.getLocation());
         hashMap.put("tel", postInfo.getTel());
         hashMap.put("description", postInfo.getDescription());
 
         Log.d("postinfo image" , "is "+ postInfo.getImage());
-
-        //hashMap.put("type", type_pet);
+        
         hashMap.put("image", ""+keepimage);
         database.push().setValue(hashMap);
 
 
-        /// put on history
+        /// put on history in firebase
 
         final DatabaseReference databaseHistory = FirebaseDatabase.getInstance().getReference("MyHistory").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
@@ -339,7 +336,6 @@ public class AddPostActivity extends AppCompatActivity implements AdapterView.On
         postInfo.setTel(tel.getText().toString());
         postInfo.setImage(selectedImage.toString());
 
-        // put in firebase
         HashMap<String , Object> hashMap1 = new HashMap<>();
 
         hashMap1.put("title", postInfo.getTitle());

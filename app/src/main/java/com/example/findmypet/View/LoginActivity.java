@@ -1,7 +1,6 @@
 package com.example.findmypet.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.findmypet.Adapter.SlideAdapter;
 import com.example.findmypet.R;
 import com.example.findmypet.Model.Userlogin;
 import com.facebook.AccessToken;
@@ -38,7 +36,6 @@ import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
-
     private FirebaseUser user;
     private FirebaseAuth auth;
     private Button btn_facebook;
@@ -58,36 +55,42 @@ public class LoginActivity extends AppCompatActivity {
 
         // login
         onClickFacebookLogin();
-
     }
+
 
     protected void onClickFacebookLogin(){
         // facebook
+        // facebook login button invisible
+        // manage login
         callbackManager = CallbackManager.Factory.create();
         btn_facebook = findViewById(R.id.Fb_login_button);
+
         btn_facebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // facebook login button invisible
-                // check success
-                // check user cancel
-                //check error
                 btn_facebook.setVisibility(View.INVISIBLE);
-                LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
-                LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                    @Override
-                    public void onSuccess(LoginResult loginResult) {
-                        handleFacebookAccessToken(loginResult.getAccessToken());
-                    }
-                    @Override
-                    public void onCancel() {
-                        Toast.makeText(getApplicationContext(), "User Cancel it", Toast.LENGTH_LONG).show();
-                    }
-                    @Override
-                    public void onError(FacebookException error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
+                ManageLogin();
+
+            }
+        });
+    }
+
+    protected void ManageLogin(){
+        LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("email", "public_profile"));
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+            @Override
+            public void onCancel() {
+                Toast.makeText(getApplicationContext(), "User Cancel it", Toast.LENGTH_LONG).show();
+                Intent goLogin = new Intent(LoginActivity.this, LoginActivity.class);
+                startActivity(goLogin);
+            }
+            @Override
+            public void onError(FacebookException error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -100,7 +103,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser user = auth.getCurrentUser();
-                            getUserDataOnFirebase(user); }
+                            getUserDataOnFirebase(user);
+                        }
                         else {
                             Toast.makeText(getApplicationContext(), "Cound not register to firebase", Toast.LENGTH_LONG).show();
                         }
@@ -118,8 +122,10 @@ public class LoginActivity extends AppCompatActivity {
         //         - Email
         Email = user.getEmail();
         Name = user.getDisplayName();
+
         final Uri photoUrl = user.getPhotoUrl();
         final String id = user.getUid();
+
         final DatabaseReference database = FirebaseDatabase.getInstance().getReference("User").child(id);
 
         database.addValueEventListener(new ValueEventListener() {
@@ -162,7 +168,6 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 
     public void goHome(){
         Intent home = new Intent(LoginActivity.this, HomeActivity.class);

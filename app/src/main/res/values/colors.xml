@@ -9,4 +9,10 @@
     <color name="colorLightGray">#F9F7F1</color>
     <color name="colorFont">#FFFF</color>
     <color name="colorbtnFacebook">#236191</color>
+
+    <!-- tab screen style-->
+    <color name="tab_indicator_gray">#c0c0c0</color>
+    <color name="intro_title">#000</color>
+    <color name="intro_description">#656565</color>
+    
 </resources>

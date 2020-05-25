@@ -51,18 +51,17 @@ public class HomeActivity extends AppCompatActivity  {
         hometabLayout = (TabLayout) findViewById(R.id.home_tab);
         active_fragment = new profileFragment();
 
+        // dialog
         dialog_addpost = new Dialog(this);
 
-        settingToolbar();
-        settingTabLayout();
-        settingBottomNav();
+        setupToolbar();
+        setupTabLayout();
+        setupBottomNav();
 
     }
 
-    protected void settingToolbar() {
+    protected void setupToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
 
         // setting toolbar
         setSupportActionBar(toolbar);
@@ -71,7 +70,7 @@ public class HomeActivity extends AppCompatActivity  {
 
     }
 
-    protected void settingTabLayout() {
+    protected void setupTabLayout() {
 
         adapter = new ViewPageAdapter(getSupportFragmentManager());
 
@@ -85,7 +84,7 @@ public class HomeActivity extends AppCompatActivity  {
 
     }
 
-    protected void settingBottomNav() {
+    protected void setupBottomNav() {
         // *****    navigation
         //          Home        -->    display total post information
         //                                  1.  dog

@@ -66,6 +66,7 @@ public class fragment_cat extends Fragment {
 
         // alert dialog
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
         builder.setTitle(curr_title);
         builder.setMessage(curr_des);
 

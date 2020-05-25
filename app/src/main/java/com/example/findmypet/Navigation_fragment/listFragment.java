@@ -115,11 +115,14 @@ public class listFragment extends Fragment {
                 .build();
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<PostInfo, ViewHolder>(options) {
+
+            // create view then go to viewHolder (class)
             @Override
             protected void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull PostInfo model) {
                 holder.setDetails(getContext(), model.getImage(), model.getTitle(), model.getLocation(), model.getTel());
             }
 
+            // display content on device
             @NonNull
             @Override
             public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -129,7 +132,6 @@ public class listFragment extends Fragment {
                 viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {
-
 
                         String currenttiltle = getItem(position).getTitle();
                         String currentdes = getItem(position).getDescription();

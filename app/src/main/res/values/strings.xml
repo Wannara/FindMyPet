@@ -24,6 +24,10 @@
     <string name="home">Home</string>
     <string name="list">....</string>
 
+    <string name="next1">เลื่อนขวา</string>
+    <string name="next2">เลื่อนขวาอีก</string>
+    <string name="next3">เลื่อนขวาอีกๆ</string>
+
     <!--navigation-->
     <string name="open_nav">Open Navigation bar</string>
     <string name="close_nav">Close Navigation bar</string>

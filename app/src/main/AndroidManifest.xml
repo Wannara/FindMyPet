@@ -13,22 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".View.WelcomeActivity"></activity>
-        <activity android:name=".View.DetailActivity" /> <!-- <activity android:name=".Navigation_fragment.homeFragment"></activity> -->
+        <activity android:name=".View.LoginActivity"></activity>
+        <!-- <activity android:name=".Navigation_fragment.homeFragment"></activity> -->
         <activity android:name=".View.AddPostActivity" />
         <activity android:name=".View.HomeActivity" />
 
         <!-- first page -->
-        <activity android:name=".View.LoginActivity">
+        <activity android:name=".View.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-
-        <!-- facebook -->
+        </activity> <!-- facebook -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
